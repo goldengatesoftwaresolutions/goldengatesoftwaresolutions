@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+    {{ $normalize := resources.Get "node_modules/normalize.css/normalize.css" }}
+    {{ $pico := resources.Get "node_modules/@picocss/pico/css/pico.min.css" }}
+    {{ $main := resources.Get "css/main.css" }}
+    {{ $styles := slice $normalize $pico $main | resources.Concat "css/bundle.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
+    {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true "target" "es2017") | fingerprint }}
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+  </head>
+  <body x-data>
+    <header>
+      <nav class="container">
+        <a href="{{ "/" | relURL }}"><strong>{{ .Site.Title }}</strong></a>
+      </nav>
+    </header>
+    <main class="container">
+      {{ block "main" . }}{{ end }}
+    </main>
+    <footer class="container">
+      <small>&copy; {{ now.Year }} {{ .Site.Title }} &mdash; San Francisco, CA</small>
+    </footer>
+  </body>
+</html>
