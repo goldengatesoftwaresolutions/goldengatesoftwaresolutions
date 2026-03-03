@@ -1,0 +1,25 @@
+{
+  "name": "goldengatesoftwaresolutions",
+  "version": "1.0.0",
+  "description": "San Francisco Application Development Leveraging AI and 10+ Years Experience",
+  "scripts": {
+    "build": "hugo --minify",
+    "dev": "hugo server --buildDrafts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goldengatesoftwaresolutions/goldengatesoftwaresolutions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goldengatesoftwaresolutions/goldengatesoftwaresolutions/issues"
+  },
+  "homepage": "https://github.com/goldengatesoftwaresolutions/goldengatesoftwaresolutions#readme",
+  "dependencies": {
+    "@picocss/pico": "^2.1.1",
+    "alpinejs": "^3.15.8",
+    "normalize.css": "^8.0.1"
+  }
+}

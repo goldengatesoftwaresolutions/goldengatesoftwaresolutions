@@ -1,0 +1,14 @@
+baseURL = 'https://goldengatesoftwaresolutions.com/'
+languageCode = 'en-us'
+title = 'Golden Gate Software Solutions'
+
+[params]
+  description = 'Software development company based in San Francisco, CA.'
+
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "node_modules"
+    target = "assets/node_modules"

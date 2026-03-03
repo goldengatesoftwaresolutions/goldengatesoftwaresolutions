@@ -1,0 +1,4 @@
+/* Site-specific styles */
+:root {
+  --pico-font-family-sans-serif: system-ui, sans-serif;
+}

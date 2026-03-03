@@ -1,0 +1,7 @@
+{{ define "title" }}404 Not Found &mdash; {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+  <section>
+    <h1>Page Not Found</h1>
+    <p><a href="{{ "/" | relURL }}">Return home</a></p>
+  </section>
+{{ end }}
