@@ -1,0 +1,9 @@
+{{ $branding := resources.Get "image/logo/ggss-branding.png" }}
+{{ with $branding }}
+  {{ $favicon16 := .Resize "16x16 png" }}
+  {{ $favicon32 := .Resize "32x32 png" }}
+  {{ $apple := .Resize "180x180 png" }}
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon16.RelPermalink }}" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon32.RelPermalink }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ $apple.RelPermalink }}" />
+{{ end }}
