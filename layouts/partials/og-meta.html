@@ -1,0 +1,14 @@
+{{ $branding := resources.Get "image/logo/ggss-branding.png" }}
+{{ $title := cond (ne .Title "") .Title .Site.Title }}
+{{ $description := cond (ne .Description "") .Description .Site.Params.description }}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+{{ with $branding }}
+  {{ $ogImage := .Fit "1200x630 png" }}
+  <meta property="og:image" content="{{ $ogImage.Permalink }}" />
+  <meta property="og:image:width" content="{{ $ogImage.Width }}" />
+  <meta property="og:image:height" content="{{ $ogImage.Height }}" />
+{{ end }}

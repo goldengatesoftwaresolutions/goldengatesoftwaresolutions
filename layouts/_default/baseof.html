@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+    {{ partial "favicon.html" . }}
+    {{ partial "og-meta.html" . }}
     {{ $normalize := resources.Get "node_modules/normalize.css/normalize.css" }}
     {{ $pico := resources.Get "node_modules/@picocss/pico/css/pico.min.css" }}
     {{ $main := resources.Get "css/main.css" }}
