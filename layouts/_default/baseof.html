@@ -24,7 +24,7 @@
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
 </head>
 
-<body x-data="{ navOpen: false }">
+<body class="{{ if .IsHome }}home-page{{ end }}" x-data="{ navOpen: false }">
   <header>
     <nav class="site-nav" x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50"
       :class="{ 'scrolled': scrolled }">

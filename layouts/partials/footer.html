@@ -1,11 +1,36 @@
 <footer class="site-footer">
   <div class="container">
-    <p>
-      &copy; {{ now.Year }} {{ .Site.Title }}
-      &mdash;
-      <a href="mailto:hello@goldengatesoftwaresolutions.com">hello@goldengatesoftwaresolutions.com</a>
-      &mdash;
-      San Francisco, CA
-    </p>
+    <div class="site-footer__grid">
+      <div class="site-footer__meta">
+        <p>
+          &copy; {{ now.Year }} {{ .Site.Title }}
+          &mdash;
+          <a href="mailto:hello@goldengatesoftwaresolutions.com">hello@goldengatesoftwaresolutions.com</a>
+          &mdash;
+          San Francisco, CA
+        </p>
+      </div>
+      <nav class="site-footer__sitemap" aria-label="Sitemap">
+        <h2>Sitemap</h2>
+        <div class="site-footer__sitemap-groups">
+          <section class="site-footer__sitemap-group" aria-label="Site sections">
+            <h3>Site</h3>
+            <ul>
+              <li><a href="{{ " /" | relURL }}">Home</a></li>
+              {{ range .Site.Menus.main }}
+              <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+              {{ end }}
+            </ul>
+          </section>
+          <section class="site-footer__sitemap-group" aria-label="External links">
+            <h3>External</h3>
+            <ul>
+              <li><a href="https://jtt.goldengatesoftwaresolutions.com" target="_blank"
+                  rel="noopener noreferrer">Jackson the Tech Guy</a></li>
+            </ul>
+          </section>
+        </div>
+      </nav>
+    </div>
   </div>
 </footer>

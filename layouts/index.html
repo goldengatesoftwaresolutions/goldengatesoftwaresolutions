@@ -1,3 +1,36 @@
 {{ define "main" }}
-  {{ partial "hero.html" . }}
+{{ partial "hero.html" . }}
+
+<section class="landing-section landing-section--services">
+  <div class="landing-section__inner">
+    <h2>Services</h2>
+    <p>
+      Our services placeholder text. Replace this content with your core offerings, delivery model,
+      and outcomes for startup and small business clients.
+    </p>
+    <a class="landing-section__cta" href="{{ " /services/" | relURL }}">View Services</a>
+  </div>
+</section>
+
+<section class="landing-section landing-section--about">
+  <div class="landing-section__inner">
+    <h2>About</h2>
+    <p>
+      About placeholder text. Replace this section with your studio story, team background,
+      and the principles that guide how you build software.
+    </p>
+    <a class="landing-section__cta" href="{{ " /about/" | relURL }}">Learn About Us</a>
+  </div>
+</section>
+
+<section class="landing-section landing-section--contact">
+  <div class="landing-section__inner">
+    <h2>Contact</h2>
+    <p>
+      Contact placeholder text. Replace this with your preferred intake process and what
+      information you want from prospective clients.
+    </p>
+    <a class="landing-section__cta" href="{{ " /contact/" | relURL }}">Contact Us</a>
+  </div>
+</section>
 {{ end }}
