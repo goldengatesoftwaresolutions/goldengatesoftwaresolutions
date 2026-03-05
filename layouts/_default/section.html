@@ -1,0 +1,53 @@
+{{ define "title" }}{{ .Title }} &mdash; {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+{{ $heroFile := "hero-bg-alt.png" }}
+{{ with .Params.resources.heroImage }}
+{{ $heroFile = . }}
+{{ end }}
+{{ with .Params.resources.hero_image }}
+{{ $heroFile = . }}
+{{ end }}
+{{ if and (not .Params.resources.heroImage) (not .Params.resources.hero_image) (reflect.IsSlice .Params.resources) }}
+{{ with index .Params.resources 0 }}
+{{ with .src }}
+{{ $heroFile = . }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{ $heroAssetPath := printf "image/photo/%s" $heroFile }}
+{{ $heroBackground := "/image/photo/hero-bg-alt.png" }}
+{{ with resources.Get $heroAssetPath }}
+{{ $heroBackground = .RelPermalink }}
+{{ else }}
+{{ with resources.Get "image/photo/hero-bg-alt.png" }}
+{{ $heroBackground = .RelPermalink }}
+{{ end }}
+{{ end }}
+<section class="hero hero--inner" style="background-image: url('{{ $heroBackground }}')">
+    <div class="hero-content">
+        <div class="hero-copy">
+            <h1 class="hero-heading">{{ .Title }}</h1>
+            {{ with .Description }}
+            <p class="hero-subheading">{{ . }}</p>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<section class="content-shell">
+    <div class="content-shell__inner">
+        {{ with .Content }}
+        <article class="content-article">{{ . }}</article>
+        {{ end }}
+        <div class="content-list">
+            {{ range .Pages }}
+            <article class="content-list-item">
+                <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                {{ with .Summary }}<p>{{ . }}</p>{{ end }}
+            </article>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
