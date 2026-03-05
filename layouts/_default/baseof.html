@@ -15,17 +15,15 @@
     {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true "target" "es2017") | fingerprint }}
     <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
   </head>
-  <body x-data>
-    <header>
-      <nav class="container">
-        <a href="{{ "/" | relURL }}"><strong>{{ .Site.Title }}</strong></a>
-      </nav>
-    </header>
-    <main class="container">
+  <body>
+    <nav class="site-nav" x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50" :class="{ 'scrolled': scrolled }">
+      <div class="container">
+        <a href="{{ "/" | relURL }}" class="site-nav__brand"><strong>{{ .Site.Title }}</strong></a>
+      </div>
+    </nav>
+    <main>
       {{ block "main" . }}{{ end }}
     </main>
-    <footer class="container">
-      <small>&copy; {{ now.Year }} {{ .Site.Title }} &mdash; San Francisco, CA</small>
-    </footer>
+    {{ partial "footer.html" . }}
   </body>
 </html>

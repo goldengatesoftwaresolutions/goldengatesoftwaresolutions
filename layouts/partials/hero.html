@@ -1,0 +1,7 @@
+{{ $hero := .Site.Data.hero }}
+<section class="hero" style="background-image: url('{{ $hero.backgroundImage }}')">
+  <div class="hero-content">
+    <h1 class="hero-heading">{{ $hero.heading }}</h1>
+    <p class="hero-subheading">{{ $hero.subheading }}</p>
+  </div>
+</section>
