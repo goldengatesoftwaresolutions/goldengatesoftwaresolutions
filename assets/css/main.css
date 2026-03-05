@@ -3,7 +3,9 @@
   --pico-font-family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   --nav-height: 64px;
   --nav-bg-solid: rgba(15, 23, 42, 0.97);
-  --hero-overlay: rgba(0, 0, 0, 0.6);
+  --hero-overlay: rgba(4, 10, 22, 0.72);
+  --hero-heading-color: #f8fbff;
+  --hero-subheading-color: rgba(240, 247, 255, 0.94);
   --footer-bg: #0f172a;
 }
 
@@ -17,6 +19,16 @@
 body {
   font-family: var(--pico-font-family-sans-serif);
   margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+body > header,
+body > main {
   padding: 0;
 }
 
@@ -49,18 +61,38 @@ body {
 }
 
 .site-nav__brand {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.7rem;
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
+  min-height: 2.6rem;
 }
 
 .site-nav__brand:hover {
   color: rgba(255, 255, 255, 0.85);
 }
 
-.site-nav__brand strong {
+.site-nav__logo {
+  width: auto;
+  height: 2.6rem;
+  flex: 0 0 auto;
+}
+
+.site-nav__brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 0.9rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: inherit;
+}
+
+.site-nav__brand-text span {
+  display: block;
+  line-height: 1;
 }
 
 /* ─── Hero ───────────────────────────────────────────────── */
@@ -69,7 +101,6 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80'); /* fallback if data value is absent */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -79,7 +110,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: var(--hero-overlay);
+  background: linear-gradient(110deg, rgba(3, 7, 18, 0.82) 0%, var(--hero-overlay) 55%, rgba(8, 16, 35, 0.62) 100%);
 }
 
 .hero-content {
@@ -91,24 +122,34 @@ body {
   padding: calc(var(--nav-height) + 3rem) 1.5rem 5rem;
 }
 
+.hero-copy {
+  max-width: 720px;
+  padding: 1.25rem 1.25rem 1.4rem;
+  border-radius: 0.6rem;
+  background-color: rgba(8, 15, 31, 0.3);
+  backdrop-filter: blur(2px);
+}
+
 .hero-heading {
   font-family: var(--pico-font-family-sans-serif);
-  font-size: clamp(1.9rem, 4.5vw, 3.25rem);
+  font-size: clamp(2rem, 4.2vw, 3.6rem);
   font-weight: 800;
-  color: #ffffff;
-  line-height: 1.15;
+  color: var(--hero-heading-color);
+  line-height: 1.12;
   margin: 0 0 1.25rem;
   max-width: 680px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
 }
 
 .hero-subheading {
   font-family: var(--pico-font-family-sans-serif);
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.87);
-  line-height: 1.65;
+  color: var(--hero-subheading-color);
+  line-height: 1.6;
   margin: 0;
   max-width: 540px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.38);
 }
 
 /* ─── Footer ─────────────────────────────────────────────── */
@@ -142,17 +183,73 @@ body {
 }
 
 /* ─── Responsive ─────────────────────────────────────────── */
-@media (max-width: 640px) {
+/* Pico breakpoints: xs <576, sm >=576, md >=768, lg >=1024 */
+@media (max-width: 575px) {
   .site-nav .container {
     padding: 0 1rem;
   }
 
+  .site-nav__logo {
+    height: 2.25rem;
+  }
+
+  .site-nav__brand-text {
+    font-size: 0.78rem;
+  }
+
   .hero-content {
+    padding-top: calc(var(--nav-height) + 2.25rem);
+    padding-bottom: 3.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
+  .hero-copy {
+    padding: 1rem 1rem 1.15rem;
+  }
+
+  .hero-heading {
+    font-size: 1.85rem;
+    line-height: 1.14;
+    margin-bottom: 0.9rem;
+  }
+
+  .hero-subheading {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
   .site-footer .container {
     padding: 0 1rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .hero-heading {
+    font-size: 2.25rem;
+  }
+
+  .hero-subheading {
+    font-size: 1.05rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-heading {
+    font-size: 2.8rem;
+  }
+
+  .hero-subheading {
+    font-size: 1.15rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-heading {
+    font-size: 3.35rem;
+  }
+
+  .hero-subheading {
+    font-size: 1.2rem;
   }
 }

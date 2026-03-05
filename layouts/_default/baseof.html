@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
-    {{ partial "favicon.html" . }}
-    {{ partial "og-meta.html" . }}
-    {{ $normalize := resources.Get "node_modules/normalize.css/normalize.css" }}
-    {{ $pico := resources.Get "node_modules/@picocss/pico/css/pico.min.css" }}
-    {{ $main := resources.Get "css/main.css" }}
-    {{ $styles := slice $normalize $pico $main | resources.Concat "css/bundle.css" | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
-    {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true "target" "es2017") | fingerprint }}
-    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
-  </head>
-  <body>
-    <nav class="site-nav" x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50" :class="{ 'scrolled': scrolled }">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+  {{ partial "favicon.html" . }}
+  {{ partial "og-meta.html" . }}
+  {{ $normalize := resources.Get "node_modules/normalize.css/normalize.css" }}
+  {{ $pico := resources.Get "node_modules/@picocss/pico/css/pico.min.css" }}
+  {{ $main := resources.Get "css/main.css" }}
+  {{ $styles := slice $normalize $pico $main | resources.Concat "css/bundle.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
+  {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true "target" "es2017") | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+</head>
+
+<body>
+  <header>
+    <nav class="site-nav" x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50"
+      :class="{ 'scrolled': scrolled }">
       <div class="container">
-        <a href="{{ "/" | relURL }}" class="site-nav__brand"><strong>{{ .Site.Title }}</strong></a>
+        {{ partial "nav-branding.html" . }}
       </div>
     </nav>
-    <main>
-      {{ block "main" . }}{{ end }}
-    </main>
-    {{ partial "footer.html" . }}
-  </body>
+  </header>
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+
 </html>
