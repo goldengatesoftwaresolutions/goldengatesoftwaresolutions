@@ -39,7 +39,8 @@ body > main {
   left: 0;
   right: 0;
   z-index: 100;
-  height: var(--nav-height);
+  min-height: var(--nav-height);
+  height: auto;
   display: flex;
   align-items: center;
   background-color: transparent;
@@ -55,9 +56,10 @@ body > main {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0.35rem 1.5rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .site-nav__brand {
@@ -93,6 +95,52 @@ body > main {
 .site-nav__brand-text span {
   display: block;
   line-height: 1;
+}
+
+.site-nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__links a {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.35rem 0.55rem;
+}
+
+.site-nav__links a:hover {
+  color: #ffffff;
+}
+
+.site-nav__links a[aria-current='page'] {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.site-nav__toggle {
+  display: none;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  padding: 0.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.site-nav__toggle .material-icons {
+  font-size: 1.6rem;
+}
+
+.site-nav__mobile {
+  display: none;
 }
 
 /* ─── Hero ───────────────────────────────────────────────── */
@@ -152,6 +200,59 @@ body > main {
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.38);
 }
 
+.hero--inner {
+  min-height: 50vh;
+}
+
+.hero--inner .hero-content {
+  padding-top: calc(var(--nav-height) + 2rem);
+  padding-bottom: 2.2rem;
+}
+
+.hero--inner .hero-heading {
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  margin-bottom: 0.85rem;
+}
+
+.hero--inner .hero-subheading {
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.45;
+}
+
+.content-shell {
+  padding: 2.2rem 1.5rem 3rem;
+}
+
+.content-shell__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content-article {
+  max-width: 800px;
+}
+
+.content-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.content-list-item {
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(2, 8, 23, 0.12);
+  border-radius: 0.5rem;
+}
+
+.content-list-item h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.1rem;
+}
+
+.content-list-item p {
+  margin: 0;
+}
+
 /* ─── Footer ─────────────────────────────────────────────── */
 .site-footer {
   background-color: var(--footer-bg);
@@ -186,7 +287,59 @@ body > main {
 /* Pico breakpoints: xs <576, sm >=576, md >=768, lg >=1024 */
 @media (max-width: 575px) {
   .site-nav .container {
-    padding: 0 1rem;
+    padding: 0.35rem 1rem;
+  }
+
+  .site-nav__links {
+    display: none;
+  }
+
+  .site-nav__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 0.15rem;
+    margin-bottom: 0;
+  }
+
+  .site-nav__mobile {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(10, 18, 35, 0.97);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .site-nav__mobile ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 0.4rem 1rem 0.75rem;
+  }
+
+  .site-nav__mobile li {
+    width: 100%;
+  }
+
+  .site-nav__mobile a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.6rem 0.35rem;
+    font-weight: 600;
+  }
+
+  .site-nav__mobile a[aria-current='page'] {
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
   }
 
   .site-nav__logo {
@@ -202,6 +355,15 @@ body > main {
     padding-bottom: 3.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .hero--inner .hero-content {
+    padding-top: calc(var(--nav-height) + 1.75rem);
+    padding-bottom: 1.75rem;
+  }
+
+  .content-shell {
+    padding: 1.7rem 1rem 2.5rem;
   }
 
   .hero-copy {
@@ -221,6 +383,12 @@ body > main {
 
   .site-footer .container {
     padding: 0 1rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .site-nav__mobile {
+    display: none !important;
   }
 }
 

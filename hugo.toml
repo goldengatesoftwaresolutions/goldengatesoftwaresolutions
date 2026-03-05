@@ -5,6 +5,20 @@ title = 'Golden Gate Software Solutions'
 [params]
   description = 'Software development company based in San Francisco, CA.'
 
+[menu]
+  [[menu.main]]
+    name = 'Services'
+    pageRef = '/services'
+    weight = 10
+  [[menu.main]]
+    name = 'About'
+    pageRef = '/about'
+    weight = 20
+  [[menu.main]]
+    name = 'Contact'
+    pageRef = '/contact'
+    weight = 30
+
 [module]
   [[module.mounts]]
     source = "archetypes"
