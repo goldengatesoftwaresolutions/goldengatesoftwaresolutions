@@ -1,31 +1,66 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
-    {{ partial "favicon.html" . }}
-    {{ partial "og-meta.html" . }}
-    {{ $normalize := resources.Get "node_modules/normalize.css/normalize.css" }}
-    {{ $pico := resources.Get "node_modules/@picocss/pico/css/pico.min.css" }}
-    {{ $main := resources.Get "css/main.css" }}
-    {{ $styles := slice $normalize $pico $main | resources.Concat "css/bundle.css" | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
-    {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true "target" "es2017") | fingerprint }}
-    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
-  </head>
-  <body x-data>
-    <header>
-      <nav class="container">
-        <a href="{{ "/" | relURL }}"><strong>{{ .Site.Title }}</strong></a>
-      </nav>
-    </header>
-    <main class="container">
-      {{ block "main" . }}{{ end }}
-    </main>
-    <footer class="container">
-      <small>&copy; {{ now.Year }} {{ .Site.Title }} &mdash; San Francisco, CA</small>
-    </footer>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+  {{ partial "favicon.html" . }}
+  {{ partial "og-meta.html" . }}
+  {{ $normalize := resources.Get "node_modules/normalize.css/normalize.css" }}
+  {{ $pico := resources.Get "node_modules/@picocss/pico/css/pico.min.css" }}
+  {{ $materialIcons := resources.Get "node_modules/material-icons/iconfont/material-icons.css" }}
+  {{ $main := resources.Get "css/main.css" }}
+  {{ range resources.Match "node_modules/material-icons/iconfont/*.woff*" }}
+  {{ $font := . | resources.Copy (printf "css/%s" (path.Base .Name)) }}
+  <link rel="preload" href="{{ $font.RelPermalink }}" as="font" type="font/{{ if eq .MediaType.SubType " woff2"
+    }}woff2{{ else }}woff{{ end }}" crossorigin />
+  {{ end }}
+  {{ $styles := slice $normalize $pico $materialIcons $main | resources.Concat "css/bundle.css" | minify | fingerprint
+  }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
+  {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true "target" "es2017") | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+</head>
+
+<body class="{{ if .IsHome }}home-page{{ end }}" x-data="{ navOpen: false }">
+  <header>
+    <nav class="site-nav" x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50"
+      :class="{ 'scrolled': scrolled }">
+      <div class="container">
+        {{ partial "nav-branding.html" . }}
+        <ul class="site-nav__links" aria-label="Primary">
+          {{ range .Site.Menus.main }}
+          {{ $isActive := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}
+          <li>
+            <a href="{{ .URL }}" {{ if $isActive }}aria-current="page" {{ end }}>{{ .Name }}</a>
+          </li>
+          {{ end }}
+        </ul>
+        <button class="site-nav__toggle" type="button" aria-label="Toggle navigation menu" :aria-expanded="navOpen"
+          aria-controls="site-mobile-menu" @click="navOpen = !navOpen">
+          <span class="material-icons" aria-hidden="true" x-text="navOpen ? 'close' : 'menu'"></span>
+        </button>
+      </div>
+      <div id="site-mobile-menu" class="site-nav__mobile" x-show="navOpen" x-transition.opacity.duration.150ms
+        @click.outside="navOpen = false">
+        <ul aria-label="Mobile Primary">
+          {{ range .Site.Menus.main }}
+          {{ $isActive := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}
+          <li>
+            <a href="{{ .URL }}" {{ if $isActive }}aria-current="page" {{ end }} @click="navOpen = false">{{ .Name
+              }}</a>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+
 </html>

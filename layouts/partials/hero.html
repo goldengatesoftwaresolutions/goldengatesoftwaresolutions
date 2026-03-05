@@ -1,0 +1,13 @@
+{{ $hero := .Site.Data.hero }}
+{{ $heroBackground := $hero.backgroundImage }}
+{{ with resources.Get "image/photo/hero-bg-alt.png" }}
+{{ $heroBackground = .RelPermalink }}
+{{ end }}
+<section class="hero" style="background-image: url('{{ $heroBackground }}')">
+  <div class="hero-content">
+    <div class="hero-copy">
+      <h1 class="hero-heading">{{ $hero.heading }}</h1>
+      <p class="hero-subheading">{{ $hero.subheading }}</p>
+    </div>
+  </div>
+</section>

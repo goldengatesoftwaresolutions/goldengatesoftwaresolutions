@@ -1,0 +1,10 @@
+{{ $logo := resources.Get "image/logo/ggss-branding.png" }}
+<a href="{{ "/" | relURL }}" class="site-nav__brand" aria-label="Golden Gate Software Solutions home">
+    {{ with $logo }}
+    <img class="site-nav__logo" src="{{ .RelPermalink }}" alt="Golden Gate Software Solutions logo" />
+    {{ end }}
+    <span class="site-nav__brand-text" aria-hidden="true">
+        <span>Golden Gate</span>
+        <span>Software Solutions</span>
+    </span>
+</a>
