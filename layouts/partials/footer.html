@@ -16,7 +16,7 @@
           <section class="site-footer__sitemap-group" aria-label="Site sections">
             <h3>Site</h3>
             <ul>
-              <li><a href="{{ " /" | relURL }}">Home</a></li>
+              <li><a href="{{ "/" | relURL }}">Home</a></li>
               {{ range .Site.Menus.main }}
               <li><a href="{{ .URL }}">{{ .Name }}</a></li>
               {{ end }}
