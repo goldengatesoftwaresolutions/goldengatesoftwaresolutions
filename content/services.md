@@ -17,10 +17,6 @@ Golden Gate Software Solutions helps startups and small businesses ship dependab
 
 ## Engagement Model
 
-This is placeholder content. Replace this section with your preferred process, timelines, and team structure.
-
-Typical engagement flow:
-
 1. Discovery and requirements alignment
 2. Technical planning and milestone definition
 3. Iterative delivery with weekly check-ins
@@ -28,4 +24,4 @@ Typical engagement flow:
 
 ## Next Step
 
-Use this page to explain what a new client should do first, such as booking a discovery call or sending a project brief.
+Email us via the [contact](/contact) page.

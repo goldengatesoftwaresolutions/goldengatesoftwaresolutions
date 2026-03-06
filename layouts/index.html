@@ -23,19 +23,17 @@
     <div class="about-layout">
       <div class="about-layout__text">
         <h2>About</h2>
+        {{ with site.Data.about.landing.blurb}}
         <p>
-          Golden Gate Software Solutions was founded in San Francisco with a simple conviction: small
-          businesses and startups deserve enterprise-grade software without the enterprise price tag.
-          What began as a one-person consultancy has grown into a focused development studio built
-          around a hands-on, partnership-first approach — working closely with founders and growing
-          teams to turn ideas into reliable, maintainable products. From early-stage prototypes to
-          production-ready platforms, we bring senior-level craft and genuine care to every
-          engagement, helping clients move fast, build right, and scale with confidence.
+          {{ . }}
         </p>
+        {{ end }}
         <a class="landing-section__cta" href="{{ "/about/" | relURL }}">Learn About Us</a>
       </div>
       <div class="about-layout__image">
-        <img src="{{ "/images/founder.jpg" | relURL }}" alt="Founder of Golden Gate Software Solutions" />
+        {{ with resources.Get "image/photo/avatar.png" }}
+        <img src="{{ .RelPermalink }}" alt="Founder of Golden Gate Software Solutions" />
+        {{ end }}
       </div>
     </div>
   </div>
