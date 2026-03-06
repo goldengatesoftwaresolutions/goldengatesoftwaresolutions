@@ -1,0 +1,32 @@
+[
+  {
+    "title": "UI/UX Design",
+    "icon": "palette",
+    "blurb": "Intuitive, beautiful interfaces that delight users and strengthen your brand — from initial wireframes to polished, production-ready designs."
+  },
+  {
+    "title": "Front-End Development",
+    "icon": "code",
+    "blurb": "Pixel-perfect, accessible web applications built with modern frameworks and optimized for speed, usability, and cross-device compatibility."
+  },
+  {
+    "title": "Back-End Engineering",
+    "icon": "dns",
+    "blurb": "Robust APIs and server-side systems designed for reliability and scale, so your product can grow without hitting walls."
+  },
+  {
+    "title": "Internal Tooling Development",
+    "icon": "build",
+    "blurb": "Custom dashboards, admin panels, and workflow tools that streamline operations and give your team the leverage to do more with less."
+  },
+  {
+    "title": "Prototyping",
+    "icon": "science",
+    "blurb": "Rapid proof-of-concept builds that validate ideas quickly, reduce risk, and help stakeholders align before committing to full development."
+  },
+  {
+    "title": "Static Site Deployment",
+    "icon": "rocket_launch",
+    "blurb": "Lightning-fast, secure static sites deployed to a global CDN — zero servers, near-zero maintenance, and blazing performance out of the box."
+  }
+]

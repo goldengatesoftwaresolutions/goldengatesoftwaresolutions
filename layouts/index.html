@@ -4,33 +4,56 @@
 <section class="landing-section landing-section--services">
   <div class="landing-section__inner">
     <h2>Services</h2>
-    <p>
-      Our services placeholder text. Replace this content with your core offerings, delivery model,
-      and outcomes for startup and small business clients.
+    <p class="landing-section__lead">
+      From concept to deployment, we offer a full spectrum of software services tailored to the needs
+      of startups and small businesses. Whether you need a polished interface, a scalable back end,
+      or a custom internal tool — we build it right, the first time.
     </p>
-    <a class="landing-section__cta" href="{{ "/services/" | relURL }}">View Services</a>
+    <div class="service-cards">
+      {{ range .Site.Data.services }}
+      {{ partial "service-card.html" . }}
+      {{ end }}
+    </div>
+    <a class="landing-section__cta" href="{{ "/services/" | relURL }}">View All Services</a>
   </div>
 </section>
 
 <section class="landing-section landing-section--about">
   <div class="landing-section__inner">
-    <h2>About</h2>
-    <p>
-      About placeholder text. Replace this section with your studio story, team background,
-      and the principles that guide how you build software.
-    </p>
-    <a class="landing-section__cta" href="{{ "/about/" | relURL }}">Learn About Us</a>
+    <div class="about-layout">
+      <div class="about-layout__text">
+        <h2>About</h2>
+        <p>
+          Golden Gate Software Solutions was founded in San Francisco with a simple conviction: small
+          businesses and startups deserve enterprise-grade software without the enterprise price tag.
+          What began as a one-person consultancy has grown into a focused development studio built
+          around a hands-on, partnership-first approach — working closely with founders and growing
+          teams to turn ideas into reliable, maintainable products. From early-stage prototypes to
+          production-ready platforms, we bring senior-level craft and genuine care to every
+          engagement, helping clients move fast, build right, and scale with confidence.
+        </p>
+        <a class="landing-section__cta" href="{{ "/about/" | relURL }}">Learn About Us</a>
+      </div>
+      <div class="about-layout__image">
+        <img src="{{ "/images/founder.jpg" | relURL }}" alt="Founder of Golden Gate Software Solutions" />
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="landing-section landing-section--contact">
   <div class="landing-section__inner">
-    <h2>Contact</h2>
-    <p>
-      Contact placeholder text. Replace this with your preferred intake process and what
-      information you want from prospective clients.
-    </p>
-    <a class="landing-section__cta" href="{{ "/contact/" | relURL }}">Contact Us</a>
+    <h2 class="contact-heading">Ready to build something great?</h2>
+    <div class="contact-buttons">
+      <a class="contact-btn contact-btn--call" href="tel:+14155550100">
+        <span class="material-icons" aria-hidden="true">phone</span>
+        Call Us
+      </a>
+      <a class="contact-btn contact-btn--email" href="mailto:hello@goldengatesoftwaresolutions.com">
+        <span class="material-icons" aria-hidden="true">mail</span>
+        Email Us
+      </a>
+    </div>
   </div>
 </section>
 {{ end }}
