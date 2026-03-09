@@ -1,0 +1,19 @@
+<div class="portfolio-card">
+  <div class="portfolio-card__body">
+    <h2 class="portfolio-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{ with .Description }}<p class="portfolio-card__desc">{{ . }}</p>{{ end }}
+    <div class="portfolio-card__meta">
+      {{ with .Params.industry }}<span class="portfolio-card__tag">{{ . }}</span>{{ end }}
+      {{ with .Params.type }}<span class="portfolio-card__tag">{{ . }}</span>{{ end }}
+    </div>
+    <div class="portfolio-card__actions">
+      <a class="portfolio-card__link portfolio-card__link--detail" href="{{ .RelPermalink }}">View Case Study</a>
+      {{ with .Params.liveUrl }}
+      <a class="portfolio-card__link portfolio-card__link--live" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+        <span class="material-icons" aria-hidden="true">open_in_new</span>
+        Live Site
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+{{ define "title" }}{{ .Title }} &mdash; {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+{{ $heroBackground := "/image/photo/hero-bg-alt.png" }}
+{{ with resources.Get "image/photo/hero-bg-alt.png" }}
+{{ $heroBackground = .RelPermalink }}
+{{ end }}
+<section class="hero hero--inner" style="background-image: url('{{ $heroBackground }}')">
+    <div class="hero-content">
+        <div class="hero-copy">
+            <h1 class="hero-heading">{{ .Title }}</h1>
+            {{ with .Description }}
+            <p class="hero-subheading">{{ . }}</p>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<section class="content-shell">
+    <div class="content-shell__inner">
+        <div class="portfolio-detail">
+            <aside class="portfolio-detail__sidebar">
+                <dl class="portfolio-detail__meta">
+                    {{ with .Params.client }}
+                    <div class="portfolio-detail__meta-item">
+                        <dt>Client</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.industry }}
+                    <div class="portfolio-detail__meta-item">
+                        <dt>Industry</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.type }}
+                    <div class="portfolio-detail__meta-item">
+                        <dt>Type</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.liveUrl }}
+                    <div class="portfolio-detail__meta-item">
+                        <dt>Live Site</dt>
+                        <dd>
+                            <a href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                                <span class="material-icons" aria-hidden="true">open_in_new</span>
+                                Visit Site
+                            </a>
+                        </dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.tags }}
+                    <div class="portfolio-detail__meta-item">
+                        <dt>Tags</dt>
+                        <dd class="portfolio-detail__tags">
+                            {{ range . }}<span class="portfolio-card__tag">{{ . }}</span>{{ end }}
+                        </dd>
+                    </div>
+                    {{ end }}
+                </dl>
+                <a class="portfolio-detail__back" href="{{ "/portfolio/" | relURL }}">
+                    <span class="material-icons" aria-hidden="true">arrow_back</span>
+                    Back to Portfolio
+                </a>
+            </aside>
+            <article class="content-article portfolio-detail__content">
+                {{ .Content }}
+            </article>
+        </div>
+    </div>
+</section>
+{{ end }}
