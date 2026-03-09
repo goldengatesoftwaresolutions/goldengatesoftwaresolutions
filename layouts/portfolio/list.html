@@ -1,0 +1,30 @@
+{{ define "title" }}{{ .Title }} &mdash; {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+{{ $heroBackground := "/image/photo/hero-bg-alt.png" }}
+{{ with resources.Get "image/photo/hero-bg-alt.png" }}
+{{ $heroBackground = .RelPermalink }}
+{{ end }}
+<section class="hero hero--inner" style="background-image: url('{{ $heroBackground }}')">
+    <div class="hero-content">
+        <div class="hero-copy">
+            <h1 class="hero-heading">{{ .Title }}</h1>
+            {{ with .Description }}
+            <p class="hero-subheading">{{ . }}</p>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<section class="content-shell">
+    <div class="content-shell__inner">
+        {{ with .Content }}
+        <article class="content-article">{{ . }}</article>
+        {{ end }}
+        <div class="portfolio-grid">
+            {{ range .Pages }}
+            {{ partial "portfolio-card.html" . }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
